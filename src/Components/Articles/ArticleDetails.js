@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Page, Header, Grid } from "tabler-react";
-import { fetchArticle } from "./../../actions";
+import { fetchArticle, deleteArticle } from "./../../actions";
 import AuthorCard from "./AuthorCard";
 import ArticleActionCard from "./ArticleActionCard";
+import { withRouter } from "react-router-dom";
+import { ARTICLES_PAGE_URL } from "./../../constants";
 
 class ArticleDetails extends Component {
   componentDidMount() {
     this.props.fetchArticle(this.props.match.params.id);
   }
 
-  handleDeleteArticle = () => {};
+  handleDeleteArticle = () => {
+    const articleId = this.props.match.params.id;
+    this.props.deleteArticle(articleId);
+    this.props.history.push(ARTICLES_PAGE_URL);
+  };
 
   handleEditArticle = () => {};
 
@@ -31,7 +37,7 @@ class ArticleDetails extends Component {
                     author={this.props.article.author}
                     created_at={this.props.article.created_at}
                     editArticle={this.handleEditArticle}
-                    deleteArticle={this.handleEditArticle}
+                    deleteArticle={this.handleDeleteArticle}
                   />
                 </Grid.Col>
                 <Grid.Col>
@@ -55,4 +61,6 @@ function mapStateToProps(state) {
     article: state.article,
   };
 }
-export default connect(mapStateToProps, { fetchArticle })(ArticleDetails);
+export default connect(mapStateToProps, { fetchArticle, deleteArticle })(
+  withRouter(ArticleDetails)
+);

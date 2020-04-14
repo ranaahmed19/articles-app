@@ -5,6 +5,7 @@ export const FETCH_ARTICLES = "fetchArticles";
 export const ADD_ARTICLE = "addArticle";
 export const LOGIN = "login";
 export const FETCH_ARTICLE = "fetchArticle";
+export const DELETE_ARTICLE = "deleteArticle";
 
 let allArticles = [];
 
@@ -39,5 +40,13 @@ export function login(user) {
   return {
     type: LOGIN,
     payload: loggedInUser,
+  };
+}
+
+export function deleteArticle(articleId) {
+  allArticles = allArticles.filter((item) => item.id !== articleId);
+  return {
+    type: DELETE_ARTICLE,
+    payload: articleId,
   };
 }

@@ -2,7 +2,12 @@ import React from "react";
 import { Page, Grid, Button } from "tabler-react";
 import { LOGGEDIN_USER_USERNAME } from "./../../constants";
 
-export default function ArticleActionCard({ author, created_at }) {
+export default function ArticleActionCard({
+  author,
+  created_at,
+  deleteArticle,
+  editArticle,
+}) {
   return (
     <Page.Card>
       <Grid>
@@ -11,13 +16,17 @@ export default function ArticleActionCard({ author, created_at }) {
             <strong>Created at</strong> {created_at}
           </Grid.Col>
         </Grid.Row>
-        <ActionButtons author={author} />
+        <ActionButtons
+          author={author}
+          editArticle={editArticle}
+          deleteArticle={deleteArticle}
+        />
       </Grid>
     </Page.Card>
   );
 }
 
-function ActionButtons({ author }) {
+function ActionButtons({ author, deleteArticle, editArticle }) {
   const loggedInUser = localStorage.getItem(LOGGEDIN_USER_USERNAME) || "";
   return loggedInUser === author ? (
     <>
@@ -26,7 +35,9 @@ function ActionButtons({ author }) {
         <Grid.Col>
           <Button.List>
             <Button>Edit</Button>
-            <Button color="red">Delete</Button>
+            <Button onClick={deleteArticle} color="red">
+              Delete
+            </Button>
           </Button.List>
         </Grid.Col>
       </Grid.Row>
