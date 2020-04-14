@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Form, Button, Page, Card, Header } from "tabler-react";
 import { addArticle } from "../../actions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { LOGGEDIN_USER_USERNAME, ARTICLES_PAGE_URL } from "./../../constants";
+import { LOGGEDIN_USER_USERNAME, ARTICLES_PAGE_URL } from "../../constants";
+import ArticleForm from "./ArticleForm";
 
 class AddArticle extends Component {
   constructor(props) {
@@ -12,9 +12,6 @@ class AddArticle extends Component {
       article: {
         title: "",
         body: "",
-        author: "",
-        created_at: "",
-        id: "",
       },
       error: {
         title: "",
@@ -24,15 +21,27 @@ class AddArticle extends Component {
   }
   saveArticle = () => {
     if (this.validateForm()) {
-      const newArticle = this.state.article;
-      const date = new Date();
-      newArticle.author = localStorage.getItem(LOGGEDIN_USER_USERNAME);
-      newArticle.created_at = "".concat(
-        date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
-      );
+      let newArticle = this.createArticle();
+      newArticle.title = this.state.article.title;
+      newArticle.body = this.state.article.body;
       this.props.addArticle(newArticle);
       this.props.history.push(ARTICLES_PAGE_URL);
     }
+  };
+  createArticle = () => {
+    let newArticle = {
+      title: "",
+      body: "",
+      author: "",
+      created_at: "",
+      id: "",
+    };
+    const date = new Date();
+    newArticle.author = localStorage.getItem(LOGGEDIN_USER_USERNAME);
+    newArticle.created_at = "".concat(
+      date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
+    );
+    return newArticle;
   };
 
   handleOnChange = (e) => {
@@ -56,47 +65,21 @@ class AddArticle extends Component {
 
   render() {
     return (
-      <Page>
-        <Page.Card>
-          <Card.Header>
-            {" "}
-            <Header.H1>New Article</Header.H1>
-          </Card.Header>
-          <Card.Body>
-            <Form>
-              <Form.FieldSet>
-                <Form.Input
-                  label="Title"
-                  placeholder="Title"
-                  value={this.state.article.title}
-                  name="title"
-                  error={this.state.error.title}
-                  onChange={this.handleOnChange}
-                ></Form.Input>
-                <Form.Textarea
-                  label="Body"
-                  placeholder="Body"
-                  value={this.state.article.body}
-                  name="body"
-                  error={this.state.error.body}
-                  onChange={this.handleOnChange}
-                ></Form.Textarea>
-              </Form.FieldSet>
-              <Form.Footer>
-                <Button type="button" onClick={this.saveArticle}>
-                  Save
-                </Button>
-              </Form.Footer>
-            </Form>
-          </Card.Body>
-        </Page.Card>
-      </Page>
+      <ArticleForm
+        article={this.state.article}
+        handleOnChange={this.handleOnChange}
+        error={this.state.error}
+        saveArticle={this.saveArticle}
+        header="New Article"
+      />
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    state,
+    article: state.article,
   };
 }
-export default connect(mapStateToProps, { addArticle })(withRouter(AddArticle));
+export default connect(mapStateToProps, {
+  addArticle,
+})(withRouter(AddArticle));
