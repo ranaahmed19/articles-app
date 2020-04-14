@@ -4,7 +4,7 @@ import { fetchArticles } from "../../actions";
 import ArticlesList from "./ArticlesList";
 import { Button, Page } from "tabler-react";
 import { withRouter } from "react-router-dom";
-import { ADD_ARTICLE_URL } from "./../../constants";
+import { ADD_ARTICLE_URL, ARTICLE_DETAILS_URL } from "./../../constants";
 
 class ArticlesPage extends Component {
   componentDidMount() {
@@ -15,9 +15,9 @@ class ArticlesPage extends Component {
     this.props.history.push(ADD_ARTICLE_URL);
   };
 
-  handleArticleOnClick(id) {
-    console.log("clicked", id);
-  }
+  handleArticleOnClick = (id) => {
+    this.props.history.push(ARTICLE_DETAILS_URL + "/" + id);
+  };
 
   render() {
     return (
