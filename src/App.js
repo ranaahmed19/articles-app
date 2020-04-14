@@ -24,14 +24,11 @@ function App() {
       <Switch>
         <Route path={LOGIN_URL} component={LoginPage} />
         <PrivateRoute path={ADD_ARTICLE_URL} component={AddArticle} />
-        <PrivateRoute
-          path={ARTICLE_DETAILS_URL + "/:id"}
-          component={ArticleDetails}
-        />
+        <Route path={ARTICLE_DETAILS_URL + "/:id"} component={ArticleDetails} />
         <NavBar>
-          <PrivateRoute path={ARTICLES_PAGE_URL} component={ArticlesPage} />
-          <PrivateRoute path={HOME_PAGE_URL} component={HomePage} />
-          <PrivateRoute exact path="/" component={HomePage} />
+          <Route path={ARTICLES_PAGE_URL} component={ArticlesPage} />
+          <Route path={HOME_PAGE_URL} component={HomePage} />
+          <Route exact path="/" component={HomePage} />
         </NavBar>
       </Switch>
     </div>

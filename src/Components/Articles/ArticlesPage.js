@@ -4,7 +4,11 @@ import { fetchArticles } from "../../actions";
 import ArticlesList from "./ArticlesList";
 import { Button, Page } from "tabler-react";
 import { withRouter } from "react-router-dom";
-import { ADD_ARTICLE_URL, ARTICLE_DETAILS_URL } from "./../../constants";
+import {
+  ADD_ARTICLE_URL,
+  ARTICLE_DETAILS_URL,
+  LOGGEDIN_USER_USERNAME,
+} from "./../../constants";
 
 class ArticlesPage extends Component {
   componentDidMount() {
@@ -20,21 +24,25 @@ class ArticlesPage extends Component {
   };
 
   render() {
+    const loggedInUser = localStorage.getItem(LOGGEDIN_USER_USERNAME) || "";
     return (
       <Page>
-        <Page.Header>
-          <Button.List>
-            <Button
-              onClick={this.handleAddArticleButton}
-              icon="plus"
-              color="primary"
-              outline
-            >
-              Add Article
-            </Button>
-          </Button.List>
-        </Page.Header>
-
+        {loggedInUser !== "" ? (
+          <Page.Header>
+            <Button.List>
+              <Button
+                onClick={this.handleAddArticleButton}
+                icon="plus"
+                color="primary"
+                outline
+              >
+                Add Article
+              </Button>
+            </Button.List>
+          </Page.Header>
+        ) : (
+          ""
+        )}
         <Page.Content>
           <ArticlesList
             articles={this.props.articles}
