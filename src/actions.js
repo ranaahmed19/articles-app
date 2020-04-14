@@ -6,6 +6,7 @@ export const ADD_ARTICLE = "addArticle";
 export const LOGIN = "login";
 export const FETCH_ARTICLE = "fetchArticle";
 export const DELETE_ARTICLE = "deleteArticle";
+export const EDIT_ARTICLE = "editArticle";
 
 let allArticles = [];
 
@@ -48,5 +49,20 @@ export function deleteArticle(articleId) {
   return {
     type: DELETE_ARTICLE,
     payload: articleId,
+  };
+}
+
+export function editArticle(updatedArticle) {
+  const index = allArticles.findIndex(
+    (article) => article.id === updatedArticle.id
+  );
+  allArticles = [
+    ...allArticles.slice(0, index),
+    updatedArticle,
+    ...allArticles.slice(index + 1),
+  ];
+  return {
+    type: EDIT_ARTICLE,
+    payload: updatedArticle,
   };
 }

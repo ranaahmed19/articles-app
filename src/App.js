@@ -6,15 +6,17 @@ import ArticlesPage from "./Components/Articles/ArticlesPage";
 import HomePage from "./Components/HomePage";
 import LoginPage from "./Components/Login/LoginPage";
 import PrivateRoute from "./Components/PrivateRoute";
-import AddArticle from "./Components/Articles/AddArticle";
 import {
   LOGIN_URL,
   ARTICLES_PAGE_URL,
   HOME_PAGE_URL,
   ADD_ARTICLE_URL,
   ARTICLE_DETAILS_URL,
+  EDIT_ARTICLE_URL,
 } from "./constants";
 import ArticleDetails from "./Components/Articles/ArticleDetails";
+import EditArticle from "./Components/Articles/EditArticle";
+import AddArticle from "./Components/Articles/AddArticle";
 function App() {
   return (
     <div className="App">
@@ -24,6 +26,10 @@ function App() {
       <Switch>
         <Route path={LOGIN_URL} component={LoginPage} />
         <PrivateRoute path={ADD_ARTICLE_URL} component={AddArticle} />
+        <PrivateRoute
+          path={EDIT_ARTICLE_URL + "/:id"}
+          component={EditArticle}
+        />
         <Route path={ARTICLE_DETAILS_URL + "/:id"} component={ArticleDetails} />
         <NavBar>
           <Route path={ARTICLES_PAGE_URL} component={ArticlesPage} />

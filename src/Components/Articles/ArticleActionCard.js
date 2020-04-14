@@ -34,7 +34,7 @@ function ActionButtons({ author, deleteArticle, editArticle }) {
       <Grid.Row>
         <Grid.Col>
           <Button.List>
-            <Button>Edit</Button>
+            <Button onClick={editArticle}>Edit</Button>
             <Button onClick={deleteArticle} color="red">
               Delete
             </Button>

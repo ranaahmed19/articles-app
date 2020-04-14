@@ -5,7 +5,7 @@ import { fetchArticle, deleteArticle } from "./../../actions";
 import AuthorCard from "./AuthorCard";
 import ArticleActionCard from "./ArticleActionCard";
 import { withRouter } from "react-router-dom";
-import { ARTICLES_PAGE_URL } from "./../../constants";
+import { ARTICLES_PAGE_URL, EDIT_ARTICLE_URL } from "./../../constants";
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -18,7 +18,10 @@ class ArticleDetails extends Component {
     this.props.history.push(ARTICLES_PAGE_URL);
   };
 
-  handleEditArticle = () => {};
+  handleEditArticle = () => {
+    const articleId = this.props.match.params.id;
+    this.props.history.push(EDIT_ARTICLE_URL + "/" + articleId);
+  };
 
   render() {
     return (
