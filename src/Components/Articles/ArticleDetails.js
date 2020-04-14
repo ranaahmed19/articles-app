@@ -12,7 +12,11 @@ class ArticleDetails extends Component {
     return (
       <Page>
         <Page.Card>
-          <Header.H1>{this.props.article.title}</Header.H1>
+          {Object.keys(this.props.article).length === 0 ? (
+            <Header.H1>Article Not Found</Header.H1>
+          ) : (
+            <Header.H1>{this.props.article.title}</Header.H1>
+          )}
         </Page.Card>
       </Page>
     );
