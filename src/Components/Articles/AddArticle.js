@@ -14,7 +14,7 @@ class AddArticle extends Component {
         body: "",
         author: "",
         created_at: "",
-        id: 0,
+        id: "",
       },
       error: {
         title: "",
