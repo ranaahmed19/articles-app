@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Page, Header, Grid, Profile } from "tabler-react";
+import { Page, Header, Grid } from "tabler-react";
 import { fetchArticle } from "./../../actions";
+import AuthorCard from "./AuthorCard";
+import ArticleActionCard from "./ArticleActionCard";
 
 class ArticleDetails extends Component {
   componentDidMount() {
     this.props.fetchArticle(this.props.match.params.id);
-    console.log(this.props.match.params.id);
   }
+
+  handleDeleteArticle = () => {};
+
+  handleEditArticle = () => {};
+
   render() {
     return (
       <Page>
@@ -20,23 +26,13 @@ class ArticleDetails extends Component {
             <Grid>
               <Grid.Row>
                 <Grid.Col lg="3">
-                  <Page.Card>
-                    <Grid>
-                      <Grid.Row cards alignItems="center">
-                        <Grid.Col alignItems="center">
-                          <Profile.Image
-                            size="l"
-                            avatarURL="https://tabler.github.io/tabler/demo/faces/male/17.jpg"
-                          />
-                        </Grid.Col>
-                      </Grid.Row>
-                      <Grid.Row className="profile-row">
-                        <Grid.Col>
-                          <Header.H3>{this.props.article.author}</Header.H3>
-                        </Grid.Col>
-                      </Grid.Row>
-                    </Grid>
-                  </Page.Card>
+                  <AuthorCard name={this.props.article.author} />
+                  <ArticleActionCard
+                    author={this.props.article.author}
+                    created_at={this.props.article.created_at}
+                    editArticle={this.handleEditArticle}
+                    deleteArticle={this.handleEditArticle}
+                  />
                 </Grid.Col>
                 <Grid.Col>
                   <Page.Card>
