@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import "./App.css";
+import NavBar from "./Components/NavBar";
+import { Route, Switch } from "react-router-dom";
+import ArticlesPage from "./Components/Articles/ArticlesPage";
+import HomePage from "./Components/HomePage";
+import LoginPage from "./Components/Login/LoginPage";
+import PrivateRoute from "./Components/PrivateRoute";
+import AddArticle from "./Components/Articles/AddArticle";
+import {
+  LOGIN_URL,
+  ARTICLES_PAGE_URL,
+  HOME_PAGE_URL,
+  ADD_ARTICLE_URL,
+} from "./constants";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="page-main">
+        <div className="header">React App</div>
+      </div>
+      <Switch>
+        <Route path={LOGIN_URL} component={LoginPage} />
+        <PrivateRoute path={ADD_ARTICLE_URL} component={AddArticle} />
+        <NavBar>
+          <PrivateRoute path={ARTICLES_PAGE_URL} component={ArticlesPage} />
+          <PrivateRoute path={HOME_PAGE_URL} component={HomePage} />
+          <PrivateRoute exact path="/" component={HomePage} />
+        </NavBar>
+      </Switch>
     </div>
   );
 }
