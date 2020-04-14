@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <div className="page-main">
-        <div className="header">React App</div>
+        <h1 className="header">React App</h1>
       </div>
       <Switch>
         <Route path={LOGIN_URL} component={LoginPage} />
