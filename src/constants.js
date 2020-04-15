@@ -6,3 +6,4 @@ export const HOME_PAGE_URL = "/HomePage";
 export const ADD_ARTICLE_URL = "/AddArticle";
 export const ARTICLE_DETAILS_URL = "/ArticleDetails";
 export const EDIT_ARTICLE_URL = "/EditArticle";
+export const SIGNUP_URL = "/signup";
