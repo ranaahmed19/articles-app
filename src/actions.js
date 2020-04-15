@@ -38,6 +38,7 @@ export function addArticle(article) {
 
 export function login(user) {
   const loggedInUser = user;
+  loggedInUser.token = "newToken";
   localStorage.setItem(LOGGEDIN_USER_USERNAME, loggedInUser.username);
   localStorage.setItem(LOGGEDIN_USER_TOKEN, loggedInUser.token);
   return {
