@@ -21,11 +21,9 @@ class SignupPage extends Component {
     });
   };
   onSubmit = (values, actions) => {
-    alert(JSON.stringify(values));
     setTimeout(() => {
       actions.setSubmitting(false);
     }, 1000);
-    console.log(values);
     this.props.signup(values);
     this.props.history.push("/");
   };
