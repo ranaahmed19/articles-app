@@ -21,9 +21,6 @@ class SignupPage extends Component {
     });
   };
   onSubmit = (values, actions) => {
-    setTimeout(() => {
-      actions.setSubmitting(false);
-    }, 1000);
     this.props.signup(values);
     this.props.history.push("/");
   };

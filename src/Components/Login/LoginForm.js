@@ -19,9 +19,6 @@ class LoginForm extends Component {
   };
 
   onSubmit = (values, actions) => {
-    setTimeout(() => {
-      actions.setSubmitting(false);
-    }, 1000);
     this.props.login(values);
     this.props.history.push("/");
   };
