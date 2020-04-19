@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "Components/Login/LoginForm";
 import { Page, Header } from "tabler-react";
-import { SIGNUP_URL } from "./../../constants";
+import { SIGNUP_URL } from "constants.js";
 import { Link } from "react-router-dom";
 
 export default function LoginPage() {

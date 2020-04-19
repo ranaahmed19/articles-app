@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { login } from "./../../actions";
+import { login } from "actions";
 
 class LoginForm extends Component {
   validationSchema = () => {

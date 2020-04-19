@@ -4,7 +4,7 @@ import {
   LOGGEDIN_USER_USERNAME,
   LOGGEDIN_USER_TOKEN,
   LOGIN_URL,
-} from "./../constants";
+} from "constants.js";
 import { withRouter } from "react-router-dom";
 
 function AppHeader({ history: { push } }) {

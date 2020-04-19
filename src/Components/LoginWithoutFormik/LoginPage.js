@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { login } from "./../../actions";
-import LoginForm from "./LoginForm";
+import { login } from "actions";
+import LoginForm from "Components/LoginWithoutFormik/LoginForm";
 import { Page, Header } from "tabler-react";
 import { withRouter } from "react-router-dom";
 

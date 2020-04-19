@@ -3,7 +3,7 @@ import { Page, Header } from "tabler-react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
-import { signup } from "./../actions";
+import { signup } from "actions";
 import { withRouter } from "react-router-dom";
 
 class SignupPage extends Component {
