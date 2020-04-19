@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { addArticle } from "../../actions";
+import { addArticle } from "actions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { LOGGEDIN_USER_USERNAME, ARTICLES_PAGE_URL } from "../../constants";
-import ArticleForm from "./ArticleForm";
+import { LOGGEDIN_USER_USERNAME, ARTICLES_PAGE_URL } from "constants.js";
+import ArticleForm from "Components/Articles/ArticleForm";
 
 class AddArticle extends Component {
   constructor(props) {

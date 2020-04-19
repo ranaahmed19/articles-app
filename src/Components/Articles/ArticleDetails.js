@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Page, Header, Grid } from "tabler-react";
-import { fetchArticle, deleteArticle } from "./../../actions";
-import AuthorCard from "./AuthorCard";
-import ArticleActionCard from "./ArticleActionCard";
+import { fetchArticle, deleteArticle } from "actions";
+import AuthorCard from "Components/Articles/AuthorCard";
+import ArticleActionCard from "Components/Articles/ArticleActionCard";
 import { withRouter } from "react-router-dom";
-import { ARTICLES_PAGE_URL, EDIT_ARTICLE_URL } from "./../../constants";
+import { ARTICLES_PAGE_URL, EDIT_ARTICLE_URL } from "constants.js";
 import { generatePath } from 'react-router';
 
 class ArticleDetails extends Component {

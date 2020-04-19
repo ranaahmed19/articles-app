@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { fetchArticle, editArticle } from "../../actions";
+import { fetchArticle, editArticle } from "actions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { ARTICLES_PAGE_URL } from "../../constants";
-import ArticleForm from "./ArticleForm";
+import { ARTICLES_PAGE_URL } from "constants.js";
+import ArticleForm from "Components/Articles/ArticleForm";
 
 class EditArticle extends Component {
   constructor(props) {

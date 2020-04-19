@@ -1,6 +1,6 @@
 import React from "react";
 import { Page, Grid, Button } from "tabler-react";
-import { LOGGEDIN_USER_USERNAME } from "./../../constants";
+import { LOGGEDIN_USER_USERNAME } from "constants.js";
 
 export default function ArticleActionCard({
   author,

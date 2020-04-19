@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login } from "./../../actions";
-import LoginForm from "./LoginForm";
+import { login } from "actions";
+import LoginForm from "Components/Login/LoginForm";
 import { Page, Header } from "tabler-react";
 import { withRouter } from "react-router-dom";
 class LoginPage extends Component {

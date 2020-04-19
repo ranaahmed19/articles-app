@@ -1,11 +1,11 @@
 import React from "react";
-import "./App.css";
-import NavBar from "./Components/NavBar";
+import "App.css";
+import NavBar from "Components/NavBar";
 import { Route, Switch } from "react-router-dom";
-import ArticlesPage from "./Components/Articles/ArticlesPage";
-import HomePage from "./Components/HomePage";
-import LoginPage from "./Components/Login/LoginPage";
-import PrivateRoute from "./Components/PrivateRoute";
+import ArticlesPage from "Components/Articles/ArticlesPage";
+import HomePage from "Components/HomePage";
+import LoginPage from "Components/Login/LoginPage";
+import PrivateRoute from "Components/PrivateRoute";
 import {
   LOGIN_URL,
   ARTICLES_PAGE_URL,
@@ -13,10 +13,10 @@ import {
   ADD_ARTICLE_URL,
   ARTICLE_DETAILS_URL,
   EDIT_ARTICLE_URL,
-} from "./constants";
-import ArticleDetails from "./Components/Articles/ArticleDetails";
-import EditArticle from "./Components/Articles/EditArticle";
-import AddArticle from "./Components/Articles/AddArticle";
+} from "constants.js";
+import ArticleDetails from "Components/Articles/ArticleDetails";
+import EditArticle from "Components/Articles/EditArticle";
+import AddArticle from "Components/Articles/AddArticle";
 function App() {
   return (
     <div className="App">

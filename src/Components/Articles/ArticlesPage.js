@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchArticles } from "../../actions";
-import ArticlesList from "./ArticlesList";
+import { fetchArticles } from "actions";
+import ArticlesList from "Components/Articles/ArticlesList";
 import { Button, Page } from "tabler-react";
 import { withRouter } from "react-router-dom";
 import {
   ADD_ARTICLE_URL,
   ARTICLE_DETAILS_URL,
   LOGGEDIN_USER_USERNAME,
-} from "./../../constants";
+} from "constants.js";
 import { generatePath } from 'react-router';
 
 class ArticlesPage extends Component {
