@@ -6,6 +6,7 @@ import AuthorCard from "./AuthorCard";
 import ArticleActionCard from "./ArticleActionCard";
 import { withRouter } from "react-router-dom";
 import { ARTICLES_PAGE_URL, EDIT_ARTICLE_URL } from "./../../constants";
+import { generatePath } from 'react-router';
 
 class ArticleDetails extends Component {
   componentDidMount() {
@@ -20,7 +21,8 @@ class ArticleDetails extends Component {
 
   handleEditArticle = () => {
     const articleId = this.props.match.params.id;
-    this.props.history.push(EDIT_ARTICLE_URL + "/" + articleId);
+    const path = generatePath(EDIT_ARTICLE_URL,{id: articleId})
+    this.props.history.push(path);
   };
 
   render() {

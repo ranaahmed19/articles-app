@@ -9,6 +9,7 @@ import {
   ARTICLE_DETAILS_URL,
   LOGGEDIN_USER_USERNAME,
 } from "./../../constants";
+import { generatePath } from 'react-router';
 
 class ArticlesPage extends Component {
   componentDidMount() {
@@ -20,7 +21,8 @@ class ArticlesPage extends Component {
   };
 
   handleArticleOnClick = (id) => {
-    this.props.history.push(ARTICLE_DETAILS_URL + "/" + id);
+    const path = generatePath(ARTICLE_DETAILS_URL,{id})
+    this.props.history.push(path);
   };
 
   render() {

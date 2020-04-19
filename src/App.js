@@ -27,10 +27,10 @@ function App() {
         <Route path={LOGIN_URL} component={LoginPage} />
         <PrivateRoute path={ADD_ARTICLE_URL} component={AddArticle} />
         <PrivateRoute
-          path={EDIT_ARTICLE_URL + "/:id"}
+          path={EDIT_ARTICLE_URL}
           component={EditArticle}
         />
-        <Route path={ARTICLE_DETAILS_URL + "/:id"} component={ArticleDetails} />
+        <Route path={ARTICLE_DETAILS_URL} component={ArticleDetails} />
         <NavBar>
           <Route path={ARTICLES_PAGE_URL} component={ArticlesPage} />
           <Route path={HOME_PAGE_URL} component={HomePage} />
