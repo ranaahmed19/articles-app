@@ -8,25 +8,17 @@ import ArticleForm from "Components/Articles/ArticleForm";
 class AddArticle extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      article: {
-        title: "",
-        body: "",
-      },
-      error: {
-        title: "",
-        body: "",
-      },
+    this.article = {
+      title: "",
+      body: "",
     };
   }
-  saveArticle = () => {
-    if (this.validateForm()) {
-      let newArticle = this.createArticle();
-      newArticle.title = this.state.article.title;
-      newArticle.body = this.state.article.body;
-      this.props.addArticle(newArticle);
-      this.props.history.push(ARTICLES_PAGE_URL);
-    }
+  saveArticle = (article) => {
+    let newArticle = this.createArticle();
+    newArticle.title = article.title;
+    newArticle.body = article.body;
+    this.props.addArticle(newArticle);
+    this.props.history.push(ARTICLES_PAGE_URL);
   };
   createArticle = () => {
     let newArticle = {
@@ -44,42 +36,17 @@ class AddArticle extends Component {
     return newArticle;
   };
 
-  handleOnChange = (e) => {
-    const article = this.state.article;
-    article[e.target.name] = e.target.value;
-    this.setState({ article });
-  };
-
-  validateForm() {
-    const article = this.state.article;
-    const error = {};
-    if (article.title === "" || article.body === "") {
-      if (article.title === "") error.title = "This Field is required";
-      if (article.body === "") error.body = "This Field is required";
-      this.setState({ error });
-      return false;
-    }
-    this.setState({ error });
-    return true;
-  }
-
   render() {
     return (
       <ArticleForm
-        article={this.state.article}
-        handleOnChange={this.handleOnChange}
-        error={this.state.error}
+        article={this.article}
         saveArticle={this.saveArticle}
         header="New Article"
       />
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    article: state.article,
-  };
-}
-export default connect(mapStateToProps, {
+
+export default connect(null, {
   addArticle,
 })(withRouter(AddArticle));

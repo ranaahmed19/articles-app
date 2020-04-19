@@ -7,8 +7,10 @@ export const LOGIN = "login";
 export const FETCH_ARTICLE = "fetchArticle";
 export const DELETE_ARTICLE = "deleteArticle";
 export const EDIT_ARTICLE = "editArticle";
+export const SIGNUP = "signup";
 
 let allArticles = [];
+let users = [];
 
 export function fetchArticles() {
   if (allArticles.length === 0) allArticles = articles;
@@ -36,6 +38,7 @@ export function addArticle(article) {
 
 export function login(user) {
   const loggedInUser = user;
+  loggedInUser.token = "newToken";
   localStorage.setItem(LOGGEDIN_USER_USERNAME, loggedInUser.username);
   localStorage.setItem(LOGGEDIN_USER_TOKEN, loggedInUser.token);
   return {
@@ -64,5 +67,18 @@ export function editArticle(updatedArticle) {
   return {
     type: EDIT_ARTICLE,
     payload: updatedArticle,
+  };
+}
+
+export function signup(user) {
+  users.push(user);
+  let loggedInUser = {};
+  loggedInUser.username = user.username;
+  loggedInUser.token = "newToken";
+  localStorage.setItem(LOGGEDIN_USER_USERNAME, loggedInUser.username);
+  localStorage.setItem(LOGGEDIN_USER_TOKEN, loggedInUser.token);
+  return {
+    type: SIGNUP,
+    payload: loggedInUser,
   };
 }
