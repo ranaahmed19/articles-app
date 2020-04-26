@@ -1,17 +1,14 @@
 import React from "react";
 import { Button, Grid } from "tabler-react";
-import {
-  LOGGEDIN_USER_USERNAME,
-  LOGGEDIN_USER_TOKEN,
-  LOGIN_URL,
-} from "constants.js";
+import { LOGGEDIN_USER_USERNAME, LOGIN_URL } from "constants.js";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "actions";
 
-function AppHeader({ history: { push } }) {
-  const loggedinUser = localStorage.getItem(LOGGEDIN_USER_TOKEN) || "";
-  const logout = () => {
-    localStorage.setItem(LOGGEDIN_USER_USERNAME, "");
-    localStorage.setItem(LOGGEDIN_USER_TOKEN, "");
+function AppHeader({ history: { push }, logout }) {
+  const loggedinUser = localStorage.getItem(LOGGEDIN_USER_USERNAME) || "";
+  const handleLogout = () => {
+    logout();
     push(LOGIN_URL);
   };
   const signin = () => {
@@ -28,7 +25,7 @@ function AppHeader({ history: { push } }) {
           <Grid.Col lg="2">
             <Button.List>
               {loggedinUser !== "" ? (
-                <Button onClick={logout} icon="log-out" color="primary">
+                <Button onClick={handleLogout} icon="log-out" color="primary">
                   {"  "}
                   Log out
                 </Button>
@@ -46,4 +43,4 @@ function AppHeader({ history: { push } }) {
   );
 }
 
-export default withRouter(AppHeader);
+export default connect(null, { logout })(withRouter(AppHeader));
