@@ -6,10 +6,11 @@ import * as serviceWorker from "./serviceWorker";
 import "tabler-react/dist/Tabler.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import reducers from "./Reducers/CombinedReducers";
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

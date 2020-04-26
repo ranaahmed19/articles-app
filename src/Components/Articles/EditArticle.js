@@ -20,11 +20,17 @@ class EditArticle extends Component {
 
   render() {
     return (
-      <ArticleForm
-        article={this.props.article}
-        saveArticle={this.saveArticle}
-        header="Edit Article"
-      />
+      <div>
+        {Object.keys(this.props.article).length !== 0 ? (
+          <ArticleForm
+            article={this.props.article}
+            saveArticle={this.saveArticle}
+            header="Edit Article"
+          />
+        ) : (
+          ""
+        )}
+      </div>
     );
   }
 }

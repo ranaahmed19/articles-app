@@ -1,6 +1,7 @@
 import React from "react";
 import { Page, Grid, Button } from "tabler-react";
 import { LOGGEDIN_USER_USERNAME } from "constants.js";
+import Moment from "moment";
 
 export default function ArticleActionCard({
   author,
@@ -13,7 +14,8 @@ export default function ArticleActionCard({
       <Grid>
         <Grid.Row>
           <Grid.Col>
-            <strong>Created at</strong> {created_at}
+            <strong>Created at</strong>{" "}
+            {Moment(created_at).format("YYYY-MM-DD")}
           </Grid.Col>
         </Grid.Row>
         <ActionButtons
@@ -28,7 +30,7 @@ export default function ArticleActionCard({
 
 function ActionButtons({ author, deleteArticle, editArticle }) {
   const loggedInUser = localStorage.getItem(LOGGEDIN_USER_USERNAME) || "";
-  return loggedInUser === author ? (
+  return loggedInUser !== author ? (
     <>
       <br />
       <Grid.Row>

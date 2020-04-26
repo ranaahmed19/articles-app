@@ -21,6 +21,7 @@ class SignupPage extends Component {
     });
   };
   onSubmit = (values, actions) => {
+    values.name = values.fullname;
     this.props.signup(values);
     this.props.history.push("/");
   };
