@@ -1,4 +1,8 @@
-import { LOGGEDIN_USER_USERNAME, LOGGEDIN_USER_TOKEN } from "constants.js";
+import {
+  LOGGEDIN_USER_USERNAME,
+  LOGGEDIN_USER_TOKEN,
+  LOGGEDIN_USER_ID,
+} from "constants.js";
 import axios from "axios";
 export const FETCH_ARTICLES = "fetchArticles";
 export const ADD_ARTICLE = "addArticle";
@@ -11,6 +15,8 @@ export const LOGOUT = "logout";
 
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Content-Type"] = "application/json";
+axios.defaults.headers.common["Access-Control-Allow-Methods"] =
+  "GET,PUT,POST,DELETE,PATCH,OPTIONS";
 
 export function fetchArticles() {
   const request = axios.get("http://localhost:3000/api/v1/articles");
@@ -50,6 +56,7 @@ export function login(user) {
     request.then(({ data }) => {
       localStorage.setItem(LOGGEDIN_USER_USERNAME, data.user.username);
       localStorage.setItem(LOGGEDIN_USER_TOKEN, "token");
+      localStorage.setItem(LOGGEDIN_USER_ID, data.user.id);
       dispatch({ type: LOGIN, payload: data.user });
     });
   };
@@ -70,7 +77,7 @@ export function editArticle(updatedArticle) {
   const request = axios.patch(
     "http://localhost:3000/api/v1/articles/" + updatedArticle.id,
     {
-      updatedArticle,
+      article: updatedArticle,
     }
   );
   return (dispatch) => {
@@ -88,6 +95,7 @@ export function signup(user) {
     request.then(({ data }) => {
       localStorage.setItem(LOGGEDIN_USER_USERNAME, data.user.username);
       localStorage.setItem(LOGGEDIN_USER_TOKEN, "token");
+      localStorage.setItem(LOGGEDIN_USER_ID, data.user.id);
       dispatch({ type: SIGNUP, payload: data.user });
     });
   };
@@ -98,6 +106,7 @@ export function logout() {
     request.then(({ data }) => {
       localStorage.setItem(LOGGEDIN_USER_USERNAME, "");
       localStorage.setItem(LOGGEDIN_USER_TOKEN, "");
+      localStorage.setItem(LOGGEDIN_USER_ID, "");
       dispatch({ type: LOGOUT, payload: {} });
     });
   };

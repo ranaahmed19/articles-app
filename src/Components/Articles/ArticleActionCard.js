@@ -30,7 +30,7 @@ export default function ArticleActionCard({
 
 function ActionButtons({ author, deleteArticle, editArticle }) {
   const loggedInUser = localStorage.getItem(LOGGEDIN_USER_USERNAME) || "";
-  return loggedInUser !== author ? (
+  return loggedInUser === author ? (
     <>
       <br />
       <Grid.Row>

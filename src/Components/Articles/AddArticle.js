@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { addArticle } from "actions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { LOGGEDIN_USER_USERNAME, ARTICLES_PAGE_URL } from "constants.js";
+import { LOGGEDIN_USER_ID, ARTICLES_PAGE_URL } from "constants.js";
 import ArticleForm from "Components/Articles/ArticleForm";
 
 class AddArticle extends Component {
@@ -14,26 +14,16 @@ class AddArticle extends Component {
     };
   }
   saveArticle = (article) => {
-    let newArticle = this.createArticle();
-    newArticle.title = article.title;
-    newArticle.body = article.body;
-    this.props.addArticle(newArticle);
-    this.props.history.push(ARTICLES_PAGE_URL);
-  };
-  createArticle = () => {
     let newArticle = {
       title: "",
       body: "",
-      author: "",
-      created_at: "",
-      id: "",
+      user_id: "",
     };
-    const date = new Date();
-    newArticle.author = localStorage.getItem(LOGGEDIN_USER_USERNAME);
-    newArticle.created_at = "".concat(
-      date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
-    );
-    return newArticle;
+    newArticle.title = article.title;
+    newArticle.body = article.body;
+    newArticle.user_id = localStorage.getItem(LOGGEDIN_USER_ID) || "";
+    this.props.addArticle(newArticle);
+    this.props.history.push(ARTICLES_PAGE_URL);
   };
 
   render() {
