@@ -1,43 +1,113 @@
-import articles from "./Data/articles.json";
-import { LOGGEDIN_USER_USERNAME, LOGGEDIN_USER_TOKEN } from "./constants";
-
+import {
+  LOGGEDIN_USER_USERNAME,
+  LOGGEDIN_USER_TOKEN,
+  LOGGEDIN_USER_ID,
+} from "constants.js";
+import axios from "axios";
 export const FETCH_ARTICLES = "fetchArticles";
 export const ADD_ARTICLE = "addArticle";
 export const LOGIN = "login";
 export const FETCH_ARTICLE = "fetchArticle";
+export const DELETE_ARTICLE = "deleteArticle";
+export const EDIT_ARTICLE = "editArticle";
+export const SIGNUP = "signup";
+export const LOGOUT = "logout";
 
-let allArticles = [];
+axios.defaults.headers.common["Accept"] = "application/json";
+axios.defaults.headers.common["Content-Type"] = "application/json";
+axios.defaults.headers.common["Access-Control-Allow-Methods"] =
+  "GET,PUT,POST,DELETE,PATCH,OPTIONS";
 
 export function fetchArticles() {
-  if (allArticles.length === 0) allArticles = articles;
-  return {
-    type: FETCH_ARTICLES,
-    payload: [...allArticles],
+  const request = axios.get("http://localhost:3000/api/v1/articles");
+  return (dispatch) => {
+    request.then(({ data }) => {
+      dispatch({ type: FETCH_ARTICLES, payload: data });
+    });
   };
 }
 export function fetchArticle(articleId) {
-  if (allArticles.length === 0) allArticles = articles;
-  const article = allArticles.find((x) => x.id === articleId);
-  return {
-    type: FETCH_ARTICLE,
-    payload: article,
+  const request = axios.get(
+    "http://localhost:3000/api/v1/articles/" + articleId
+  );
+  return (dispatch) => {
+    request.then(({ data }) => {
+      dispatch({ type: FETCH_ARTICLE, payload: data.article });
+    });
   };
 }
 
 export function addArticle(article) {
-  allArticles.push(article);
-  return {
-    type: ADD_ARTICLE,
-    payload: article,
+  const request = axios.post("http://localhost:3000/api/v1/articles", {
+    article,
+  });
+  return (dispatch) => {
+    request.then(({ data }) => {
+      dispatch({ type: ADD_ARTICLE, payload: data.article });
+    });
   };
 }
 
 export function login(user) {
-  const loggedInUser = user;
-  localStorage.setItem(LOGGEDIN_USER_USERNAME, loggedInUser.username);
-  localStorage.setItem(LOGGEDIN_USER_TOKEN, loggedInUser.token);
-  return {
-    type: LOGIN,
-    payload: loggedInUser,
+  const request = axios.post("http://localhost:3000/api/v1/login", {
+    user,
+  });
+  return (dispatch) => {
+    request.then(({ data }) => {
+      localStorage.setItem(LOGGEDIN_USER_USERNAME, data.user.username);
+      localStorage.setItem(LOGGEDIN_USER_TOKEN, "token");
+      localStorage.setItem(LOGGEDIN_USER_ID, data.user.id);
+      dispatch({ type: LOGIN, payload: data.user });
+    });
+  };
+}
+
+export function deleteArticle(articleId) {
+  const request = axios.delete(
+    "http://localhost:3000/api/v1/articles/" + articleId
+  );
+  return (dispatch) => {
+    request.then(({ data }) =>
+      dispatch({ type: DELETE_ARTICLE, payload: data.article })
+    );
+  };
+}
+
+export function editArticle(updatedArticle) {
+  const request = axios.patch(
+    "http://localhost:3000/api/v1/articles/" + updatedArticle.id,
+    {
+      article: updatedArticle,
+    }
+  );
+  return (dispatch) => {
+    request.then(({ data }) => {
+      dispatch({ type: EDIT_ARTICLE, payload: data.article });
+    });
+  };
+}
+
+export function signup(user) {
+  const request = axios.post("http://localhost:3000/api/v1/users", {
+    user,
+  });
+  return (dispatch) => {
+    request.then(({ data }) => {
+      localStorage.setItem(LOGGEDIN_USER_USERNAME, data.user.username);
+      localStorage.setItem(LOGGEDIN_USER_TOKEN, "token");
+      localStorage.setItem(LOGGEDIN_USER_ID, data.user.id);
+      dispatch({ type: SIGNUP, payload: data.user });
+    });
+  };
+}
+export function logout() {
+  const request = axios.delete("http://localhost:3000/api/v1/logout");
+  return (dispatch) => {
+    request.then(({ data }) => {
+      localStorage.setItem(LOGGEDIN_USER_USERNAME, "");
+      localStorage.setItem(LOGGEDIN_USER_TOKEN, "");
+      localStorage.setItem(LOGGEDIN_USER_ID, "");
+      dispatch({ type: LOGOUT, payload: {} });
+    });
   };
 }

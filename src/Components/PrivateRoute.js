@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router";
-import { LOGGEDIN_USER_USERNAME, LOGIN_URL } from "../constants";
+import { LOGGEDIN_USER_USERNAME, LOGIN_URL } from "constants.js";
 
 const PrivateRoute = ({ component, ...rest }) => (
   <Route

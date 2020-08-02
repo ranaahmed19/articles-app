@@ -1,53 +1,72 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Page, Header, Grid, Profile } from "tabler-react";
-import { fetchArticle } from "./../../actions";
+import { Page, Header, Grid } from "tabler-react";
+import { fetchArticle, deleteArticle } from "actions";
+import AuthorCard from "Components/Articles/AuthorCard";
+import ArticleActionCard from "Components/Articles/ArticleActionCard";
+import { withRouter } from "react-router-dom";
+import { ARTICLES_PAGE_URL, EDIT_ARTICLE_URL } from "constants.js";
+import { generatePath } from "react-router";
 
 class ArticleDetails extends Component {
   componentDidMount() {
     this.props.fetchArticle(this.props.match.params.id);
-    console.log(this.props.match.params.id);
   }
+
+  handleDeleteArticle = () => {
+    const articleId = this.props.match.params.id;
+    this.props.deleteArticle(articleId);
+    this.props.history.push(ARTICLES_PAGE_URL);
+  };
+
+  handleEditArticle = () => {
+    const articleId = this.props.match.params.id;
+    const path = generatePath(EDIT_ARTICLE_URL, { id: articleId });
+    this.props.history.push(path);
+  };
+
   render() {
     return (
       <Page>
-        {Object.keys(this.props.article).length === 0 ? (
-          <Page.Card>
-            <Header.H1>Article Not Found</Header.H1>
-          </Page.Card>
+        {this.props.article ? (
+          Object.keys(this.props.article).length === 0 ? (
+            <Page.Card>
+              <Header.H1>Article Not Found</Header.H1>
+            </Page.Card>
+          ) : (
+            <Page.Content>
+              <Grid>
+                <Grid.Row>
+                  <Grid.Col lg="3">
+                    <AuthorCard
+                      name={
+                        this.props.article.author &&
+                        this.props.article.author.name
+                      }
+                    />
+                    <ArticleActionCard
+                      author={
+                        this.props.article.author &&
+                        this.props.article.author.username
+                      }
+                      created_at={this.props.article.created_at}
+                      editArticle={this.handleEditArticle}
+                      deleteArticle={this.handleDeleteArticle}
+                    />
+                  </Grid.Col>
+                  <Grid.Col>
+                    <Page.Card>
+                      <Header.H1>{this.props.article.title}</Header.H1>
+                      <br />
+                      {this.props.article.body}
+                    </Page.Card>
+                  </Grid.Col>
+                </Grid.Row>
+              </Grid>
+            </Page.Content>
+          )
         ) : (
-          <Page.Content>
-            <Grid>
-              <Grid.Row>
-                <Grid.Col lg="3">
-                  <Page.Card>
-                    <Grid>
-                      <Grid.Row cards alignItems="center">
-                        <Grid.Col alignItems="center">
-                          <Profile.Image
-                            size="l"
-                            avatarURL="https://tabler.github.io/tabler/demo/faces/male/17.jpg"
-                          />
-                        </Grid.Col>
-                      </Grid.Row>
-                      <Grid.Row className="profile-row">
-                        <Grid.Col>
-                          <Header.H3>{this.props.article.author}</Header.H3>
-                        </Grid.Col>
-                      </Grid.Row>
-                    </Grid>
-                  </Page.Card>
-                </Grid.Col>
-                <Grid.Col>
-                  <Page.Card>
-                    <Header.H1>{this.props.article.title}</Header.H1>
-                    <br />
-                    {this.props.article.body}
-                  </Page.Card>
-                </Grid.Col>
-              </Grid.Row>
-            </Grid>
-          </Page.Content>
+          ""
         )}
       </Page>
     );
@@ -59,4 +78,6 @@ function mapStateToProps(state) {
     article: state.article,
   };
 }
-export default connect(mapStateToProps, { fetchArticle })(ArticleDetails);
+export default connect(mapStateToProps, { fetchArticle, deleteArticle })(
+  withRouter(ArticleDetails)
+);

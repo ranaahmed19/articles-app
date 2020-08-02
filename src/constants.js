@@ -1,7 +1,10 @@
 export const LOGGEDIN_USER_USERNAME = "username";
 export const LOGGEDIN_USER_TOKEN = "token";
 export const LOGIN_URL = "/login";
-export const ARTICLES_PAGE_URL = "/ArticlesPage";
-export const HOME_PAGE_URL = "/HomePage";
-export const ADD_ARTICLE_URL = "/AddArticle";
-export const ARTICLE_DETAILS_URL = "/ArticleDetails";
+export const ARTICLES_PAGE_URL = "/articles";
+export const HOME_PAGE_URL = "/home";
+export const ADD_ARTICLE_URL = "/article/new";
+export const ARTICLE_DETAILS_URL = "/article/:id";
+export const EDIT_ARTICLE_URL = "/article/:id/edit";
+export const SIGNUP_URL = "/signup";
+export const LOGGEDIN_USER_ID = "id";

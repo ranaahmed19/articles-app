@@ -6,11 +6,11 @@ import { withRouter } from "react-router-dom";
 class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.homeTab = "HomePage";
-    this.articlesTab = "ArticlesPage";
+    this.homeTab = "home";
+    this.articlesTab = "articles";
     const path = this.props.location.pathname;
     this.state = {
-      selectedTab: path.includes("ArticlesPage")
+      selectedTab: path.includes("articles")
         ? this.articlesTab
         : this.homeTab,
     };
@@ -35,14 +35,14 @@ class NavBar extends Component {
                 onClick={() => {
                   this.changeTab(this.homeTab);
                 }}
-                value="Home"
+                value="home"
               />
               <Nav.Item
                 active={this.checkActive(this.articlesTab)}
                 onClick={() => {
                   this.changeTab(this.articlesTab);
                 }}
-                value="Articles"
+                value="articles"
               />
             </Nav>
           </Container>
